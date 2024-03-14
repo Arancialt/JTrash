@@ -37,13 +37,12 @@ public class RealPlayerController extends PlayerController {
 			//System.out.println("RealPlayerController playTurn finisco il turno con " + lastCard);
 			break;
 		case JOLLY:
-			// TODO serve che il JTrash passi a questo metodo l'esatta istanza del jolly
-			// pescato
-			// nel parametro `mano` e si usi quella in replace
 			mano = player.replace(position, lastCard);
+			lastCard = mano;
 			currentState = TurnState.RESOLVING;
 			return playTurn(null, mano, -1);
 		case END:
+			// System.out.println("Sono in stato: " + TurnState.END);
 			break;
 			
 		case WIN_ROUND:

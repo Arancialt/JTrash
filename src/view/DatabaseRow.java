@@ -1,9 +1,12 @@
 package view;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,12 +21,6 @@ public class DatabaseRow extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 		JLabel name = new JLabel(entry.name);
 		add(name);
-		name.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// quando cliccato imposta il nome in JTrash
-			}
-		});
 		add(new JLabel(Integer.toString(entry.played)));
 		add(new JLabel(Integer.toString(entry.won)));
 		add(new JLabel(Integer.toString(entry.lost)));

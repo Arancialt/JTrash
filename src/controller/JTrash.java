@@ -48,13 +48,6 @@ public class JTrash extends Observable {
 		while (true) {
 
 		}
-//		model.creaMazzo(2);
-//		model.creaGiocatori(2);
-//		model.distribuisciCarte();
-//		
-		// Carta cartaPescata = model.getMazzo().pescaCarta();
-//		Player currentPlayer = model.getCurrentPlayer();
-//		System.out.println(cartaPescata);
 	}
 
 	private int indexCurrentPlayer;
@@ -144,18 +137,25 @@ public class JTrash extends Observable {
 
 	public void creaGiocatori(int numeroGiocatori) {
 		// TODO nome
-		if(!players.isEmpty()) {
+		if(!players.isEmpty() && players.size() != 1) {
 			players.forEach(p -> p.restart());
 		} else {
-			PlayerUtente player = new PlayerUtente(null);
-			players.add(player);
-			controllers.add(new RealPlayerController(player));
+			if (playerUtente == null) {
+				playerUtente = new PlayerUtente("utente1");
+				players.add(playerUtente);
+			}
+			// System.out.println("nome giocatore: " + playerUtente.getNome());
+			controllers.add(new RealPlayerController(playerUtente));
 			for (int i = 1; i < numeroGiocatori; i++) {
+				// System.out.println("crea un bot giocatore");
 				PlayerBot botPlayer = new PlayerBot();
 				players.add(botPlayer);
 				controllers.add(new BotController(botPlayer));
 			}
 		}
+		// System.out.println(players);
+		// System.out.println("numero giocatori: " + numeroGiocatori);
+		// players.stream().map(p -> p.getNome()).forEach(System.out::println);
 	}
 
 	/*
@@ -208,6 +208,8 @@ public class JTrash extends Observable {
 			notifyObservers("jolly," + indexCurrentPlayer);
 			break;
 		case END:
+			// qua, se il giocatori ha il jolly in mano lo devo scartare
+			
 			stockPile.push(controllers.get(indexCurrentPlayer).getLastCard());
 			endTurn(false);
 			break;
@@ -215,6 +217,7 @@ public class JTrash extends Observable {
 			if (firstWinner == Integer.MAX_VALUE) {
 				firstWinner = indexCurrentPlayer;
 			}
+			System.out.println("Win round con ultima carta: " + controllers.get(indexCurrentPlayer).getLastCard());
 			stockPile.push(controllers.get(indexCurrentPlayer).getLastCard());
 			endTurn(!roundWon);
 			roundWon = true;
@@ -248,9 +251,14 @@ public class JTrash extends Observable {
 		notifyNewTurn();
 	}
 	
-//	public void setPlayerUtente(String nome) {
-//		playerUtente = new PlayerUtente(nome);
-//	}
+	public void setPlayerUtente(String nome) {
+		playerUtente = new PlayerUtente(nome);
+		players.add(playerUtente);
+	}
+	
+	public PlayerUtente getPlayerUtente() {
+		return playerUtente;
+	}
 	
 	public Player getCurrentPlayer() {
 		// System.out.println(players);

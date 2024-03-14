@@ -3,12 +3,16 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import controller.JTrash;
 
 public class ProfileScreen extends JPanel {
 
@@ -31,6 +35,18 @@ public class ProfileScreen extends JPanel {
 		westPanel.setBackground(new Color(0, 100, 0));
 		southPanel.setBackground(new Color(0, 100, 0));
 		northPanel.setBackground(new Color(0, 100, 0));
+		
+		JButton backButton = new JButton("<-");
+		westPanel.add(backButton);
+		backButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Frame frame = Frame.getInstance();
+				frame.getCardLayout().show(frame.getCardPanel(), "TitleScreen");
+			}
+			
+		});
 		
 //		JPanel statsPanel = new JPanel();
 //		statsPanel.setLayout(new BorderLayout());

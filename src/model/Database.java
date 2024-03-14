@@ -30,10 +30,8 @@ public class Database {
 				players.add(new DatabaseEntry(line));
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -52,7 +50,6 @@ public class Database {
 			fileWriter.flush();
 			fileWriter.close();
 		} catch (IOException e) {
-			// TODO gestire il caso in cui non si riesce a scrivere sul file
 			e.printStackTrace();
 		}
 
@@ -61,20 +58,6 @@ public class Database {
 
 	public List<DatabaseEntry> getEntries() {
 		return players;
-	}
-
-	/*
-	 * Salva un giocatore su File
-	 */
-	public void salvaSuFile(PlayerUtente player) throws IOException {
-		FileOutputStream fos = new FileOutputStream("\"C:\\Users\\lafog\\OneDrive\\Desktop\\giocatori");
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
-
-		oos.writeObject(player);
-
-		oos.close();
-		fos.close();
-		System.out.println("Giocatore salvato su " + fos);
 	}
 
 	public void updateEntry(String name, boolean win) {
@@ -98,20 +81,4 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-
-	/*
-	 * public void caricaDaFile(File file) throws IOException { FileInputStream fis
-	 * = new FileInputStream(file); ObjectInputStream ois = new
-	 * ObjectInputStream(fis);
-	 * 
-	 * try { PlayerUtente[] utentiCaricati = (PlayerUtente[]) ois.readObject();
-	 * 
-	 * players.clear();
-	 * 
-	 * players.addAll(Arrays.asList(utentiCaricati));
-	 * 
-	 * } catch (ClassNotFoundException | IOException e) { e.printStackTrace(); }
-	 * 
-	 * ois.close(); fis.close(); }
-	 */
 }

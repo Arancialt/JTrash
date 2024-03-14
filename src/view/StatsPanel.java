@@ -1,8 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import javax.swing.DefaultListModel;
@@ -15,6 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import controller.JTrash;
 import model.PlayerUtente;
@@ -37,7 +44,7 @@ public class StatsPanel extends JPanel {
 	public StatsPanel() {
 
 		setLayout(new BorderLayout(50, 50));
-
+		
 		JPanel eastPanel = new JPanel();
 		JPanel westPanel = new JPanel();
 		JPanel southPanel = new JPanel();
@@ -76,6 +83,19 @@ public class StatsPanel extends JPanel {
 			listModel.addElement(entry.toString());
 		}
 		lista = new JList(listModel);
+		lista.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				String nome = JTrash.getInstance().getDatabase().getEntries().get(lista.getSelectedIndex()).name;
+				if (JTrash.getInstance().getPlayerUtente() == null) {
+					// System.out.println(nome);
+					JTrash.getInstance().setPlayerUtente(nome);
+				}
+			}
+			
+		});
+		
 		JScrollPane scrollPane = new JScrollPane(lista);
 
 		add(inputPanel, BorderLayout.NORTH);

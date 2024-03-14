@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import controller.actionListener.ExitActionListener;
 import controller.actionListener.ProfileActionListener;
 import controller.actionListener.StartActionListener;
 
@@ -42,7 +43,7 @@ public class TitleScreen extends JPanel {
 		
 		btnNewButton.addActionListener(new StartActionListener());
 		btnProfile.addActionListener(new ProfileActionListener());
-		// btnExit.addActionListener(new ExitActionListener());
+		btnExit.addActionListener(new ExitActionListener());
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1, 3));
