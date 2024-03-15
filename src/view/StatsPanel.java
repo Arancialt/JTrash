@@ -97,12 +97,14 @@ public class StatsPanel extends JPanel {
 		});
 		
 		JScrollPane scrollPane = new JScrollPane(lista);
-
+		
+		AvatarPanel avatarPanel = new AvatarPanel();
+		
 		add(inputPanel, BorderLayout.NORTH);
-		add(scrollPane, BorderLayout.CENTER);
+		add(avatarPanel, BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.SOUTH);
 
 		add(eastPanel, BorderLayout.EAST);
 		add(westPanel, BorderLayout.WEST);
-		add(southPanel, BorderLayout.SOUTH);
 	}
 }

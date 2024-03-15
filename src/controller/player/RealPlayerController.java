@@ -14,7 +14,7 @@ public class RealPlayerController extends PlayerController {
 	public TurnState playTurn(Carta topCard, Carta mano, int position) {
 		if (currentState == null) {
 			currentState = TurnState.RESOLVING;
-		}
+		} 
 		switch (currentState) {
 		case RESOLVING:
 			//System.out.println("RealPlayerController playTurn inizio turno con " + mano);
@@ -49,6 +49,9 @@ public class RealPlayerController extends PlayerController {
 			//System.out.println("RealPlayerController playTurn sono in " + currentState);
 			currentState = null;
 			return TurnState.WIN_ROUND;
+		case WIN_GAME:
+			currentState = null;
+			return TurnState.WIN_GAME;
 		}
 		// controllo se il giocatore ha vinto il round
 		if (player.hasFinishedRound()) {
@@ -56,6 +59,11 @@ public class RealPlayerController extends PlayerController {
 			currentState = null;
 			//System.out.println("RealPlayerController playTurn sono in " + TurnState.WIN_ROUND);
 			return TurnState.WIN_ROUND;
+		// controllo se il giocatore ha vinto
+		} else if (player.hasWonGame()) {
+			// se ha vinto sono il WIN_GAME
+			currentState = null;
+			return TurnState.WIN_GAME;
 		// altrimenti sono in end turn
 		} else {
 			currentState = null;

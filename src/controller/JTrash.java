@@ -217,14 +217,19 @@ public class JTrash extends Observable {
 			if (firstWinner == Integer.MAX_VALUE) {
 				firstWinner = indexCurrentPlayer;
 			}
-			System.out.println("Win round con ultima carta: " + controllers.get(indexCurrentPlayer).getLastCard());
+			// System.out.println("Win round con ultima carta: " + controllers.get(indexCurrentPlayer).getLastCard());
 			stockPile.push(controllers.get(indexCurrentPlayer).getLastCard());
 			endTurn(!roundWon);
 			roundWon = true;
 			break;
+		case WIN_GAME:
+			// quando vince notifico la view, mostro il vincitore
+			// e vado alla schermata principale
+			setChanged();
+			notifyObservers("restart");
 		}
 	}
-
+	
 	public void endTurn(boolean win) {
 		setChanged();
 		notifyObservers("end turn");

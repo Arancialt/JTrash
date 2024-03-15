@@ -33,6 +33,15 @@ public abstract class Player {
 		return terra.stream().filter(c -> c.getIsCoperta()).count() == 0;
 	}
 	
+	/*
+	 * Metodo che controlla se il giocatore ha vinto.
+	 * Per vittoria si intende il momento in cui il giocatore
+	 * rimane con 0 carte in mano
+	 */
+	public boolean hasWonGame() {
+		return terra.size() == 0;
+	}
+	
 	public Carta replace(int i, Carta card) {
 		Carta aTerra = terra.get(i);
 		aTerra.setIsCoperta(false);

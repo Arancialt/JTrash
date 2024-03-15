@@ -97,10 +97,8 @@ public class GameScreen extends JPanel implements Observer {
 				.collect(Collectors.joining());
 		JLabel label = new JLabel(
 				"Il round è stato vinto da: " + winners);
-		JButton exitButton = new JButton("Esci");
 		JFrame frame = new JFrame();
 		frame.setBackground(new Color(0, 100, 0));
-		frame.add(exitButton, BorderLayout.SOUTH);
 		frame.add(label, BorderLayout.NORTH);
 		frame.setSize(150, 150);
 		frame.setLocationRelativeTo(null);
